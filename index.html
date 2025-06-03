@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB TEXTO - Birala Sandesha | Now Do Secret Chat</title>
+  <meta name="description" content="SB TEXTO - Birala Sandesha is a unique message encryption tool that lets you hide your chats in plain sight. Type your secret message, encrypt it, and share it securely.">
+  <meta name="keywords" content="SB TEXTO, Birala Sandesha, secret chat, encrypt message, decrypt, hidden message tool, private texting, coded message, text encryption">
+  <meta name="author" content="Sandeep Biswal G">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SB TEXTO - Birala Sandesha">
+  <meta property="og:description" content="Now Do Secret Chat - Hide your messages in plain sight using SB TEXTO. Encrypt and decrypt text easily.">
+  <meta property="og:image" content="https://sbtexto.netlify.app/sb.png"> <!-- Replace with your image URL -->
+  <meta property="og:url" content="https://sbtexto.netlify.app/"> <!-- Replace with your site URL -->
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SB TEXTO - Birala Sandesha">
+  <meta name="twitter:description" content="Now Do Secret Chat - Send secret messages with unique encryption that only you can decrypt.">
+  <meta name="twitter:image" content="https://sbtexto.netlify.app/sb.png"> <!-- Replace with your image URL -->
+</head>
+    <meta name="theme-color" content="#050818">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-glow: #00f2ff;
+            --secondary-glow: #ff00c8;
+            --background-deep: #050818;
+            --background-medium: #0f1227;
+            --text-color: #e0e8ff;
+            --input-bg: #1a1d3b;
+            --border-color: #303870;
+            --accent-color: var(--primary-glow);
+            --error-color: #ff4136;
+            --success-color: #2ecc40;
+            --navbar-height: 65px; /* For padding adjustment */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans Oriya", 'Rajdhani', sans-serif;
+            background-color: var(--background-deep);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 200, 0.05) 0%, transparent 40%),
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 25px 25px, 25px 25px;
+            padding: 20px;
+            padding-top: calc(var(--navbar-height) + 20px);
+        }
+
+        #custom-cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.1s, height 0.1s, border-color 0.2s, background-color 0.2s;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        #custom-cursor.active {
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        .mouse-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary-glow);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9998;
+            opacity: 1;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, background-color 0.3s;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            background-color: rgba(10, 12, 30, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between; /* Brand left, main-right right */
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 15px rgba(0, 242, 255, 0.1);
+        }
+
+        .nav-brand {
+            font-family: 'Noto Sans Oriya', sans-serif;
+            font-size: 1.8em;
+            color: var(--primary-glow);
+            text-shadow: 0 0 8px var(--primary-glow);
+            font-weight: 700;
+        }
+        
+        .navbar-main-right { /* Groups links, lang switch, hamburger */
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links-content { /* Contains only the <a> tags */
+            display: flex; /* Horizontal links on desktop */
+            align-items: center;
+        }
+
+        .nav-links-content a {
+            font-family: "Noto Sans Oriya", sans-serif;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 25px; 
+            font-size: 1em;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .nav-links-content a:first-child { /* Remove margin for the first link if desired or use padding on parent */
+            /* margin-left: 0; */
+        }
+
+        .nav-links-content a:hover {
+            color: var(--primary-glow);
+            text-shadow: 0 0 5px var(--primary-glow);
+        }
+
+        .lang-switch {
+            font-family: "Noto Sans Oriya", 'Orbitron', sans-serif;
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 7px 14px;
+            border-radius: 5px;
+            cursor: none;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+            margin-left: 25px; /* Space from nav-links on desktop */
+        }
+
+        .lang-switch:hover {
+            background-color: var(--accent-color);
+            color: var(--background-deep);
+            transform: scale(1.05);
+        }
+
+        .hamburger-menu {
+            display: none; /* Hidden by default, shown on mobile */
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: none;
+            padding: 0;
+            z-index: 1005;
+        }
+
+        .hamburger-menu__line {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .container {
+            background-color: rgba(15, 18, 39, 0.88);
+            padding: 25px 35px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2), 0 0 15px rgba(255, 0, 200, 0.15);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .container::before, .container::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 1px;
+            background: var(--primary-glow);
+            opacity: 0.6;
+            transition: width 0.5s, height 0.5s, opacity 0.5s;
+            animation: corner-pulse 4s infinite ease-in-out;
+        }
+        .container::before { top: 10px; left: 10px; animation-delay: 0s;}
+        .container::after { bottom: 10px; right: 10px; animation-delay: -2s; }
+        
+        @keyframes corner-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.3) rotate(5deg); opacity: 1; }
+        }
+
+        h1#mainHeading {
+            font-family: "Noto Sans Oriya", sans-serif;
+            color: var(--primary-glow);
+            margin-bottom: 25px;
+            font-size: 2.3em;
+            text-shadow: 0 0 15px var(--primary-glow), 0 0 5px #fe0c0c;
+            letter-spacing: 2px;
+        }
+
+        .mode-switcher {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 7px;
+            background-color: rgba(30, 30, 60, 0.4);
+        }
+
+        .mode-switcher button {
+            flex-grow: 1;
+            padding: 10px 15px;
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            cursor: none;
+            font-family: "Noto Sans Oriya", sans-serif;
+            font-size: 0.85em;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s, transform 0.2s;
+            letter-spacing: 1px;
+        }
+        .mode-switcher button:hover {
+            transform: translateY(-2px);
+        }
+
+        .mode-switcher button.active {
+            background-color: var(--primary-glow);
+            color: var(--background-deep);
+            font-weight: bold;
+            box-shadow: 0 0 12px var(--primary-glow);
+            border-color: var(--primary-glow);
+        }
+
+        .mode-switcher button:not(.active):hover {
+            color: var(--primary-glow);
+            border-color: var(--primary-glow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        textarea,
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-family: "Noto Sans Oriya", sans-serif;
+            font-size: 1em;
+            resize: vertical;
+            cursor: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        textarea {
+            min-height: 80px;
+        }
+
+        textarea:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 10px var(--primary-glow), 0 0 20px rgba(0, 242, 255, 0.3) inset;
+        }
+
+        input[type="password"] {
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .action-buttons button {
+            flex-grow: 1;
+            padding: 12px;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Noto Sans Oriya", sans-serif;
+            font-size: 1em;
+            cursor: none;
+            transition: transform 0.2s, box-shadow 0.3s, background-position 0.5s;
+            letter-spacing: 1px;
+        }
+
+        button#processBtn {
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            background-size: 200% 200%;
+        }
+        button#processBtn:hover {
+            background-position: right center;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 242, 255, 0.3), 0 4px 12px rgba(255, 0, 200, 0.2);
+        }
+
+        button#copyBtn {
+            background: var(--input-bg);
+            border: 1px solid var(--secondary-glow);
+            color: var(--secondary-glow);
+        }
+        button#copyBtn:hover {
+            background: var(--secondary-glow);
+            color: var(--background-deep);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(255, 0, 200, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0) scale(1);
+        }
+
+        .output-container {
+             margin-top: 15px;
+        }
+
+        #outputText {
+            min-height: 80px;
+        }
+
+        .status-message {
+            margin-top: 12px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            font-size: 0.9em;
+        }
+        .status-message.error {
+            background-color: rgba(255, 65, 54, 0.2);
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+        .status-message.success {
+            background-color: rgba(46, 204, 64, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.85em;
+            color: var(--border-color);
+            opacity: 0.7;
+        }
+        footer a {
+            color: var(--primary-glow);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .navbar { 
+                padding: 0 15px;
+            }
+            body { 
+                padding-top: calc(var(--navbar-height) + 10px); 
+            }
+            .nav-brand { font-size: 1.5em; }
+            
+            .hamburger-menu {
+                display: flex; /* Show hamburger */
+                order: 2; /* After lang switch in mobile */
+            }
+
+            .nav-links-content { /* This becomes the dropdown */
+                display: none; /* Hide by default on mobile */
+                flex-direction: column;
+                align-items: center; /* Center links in dropdown */
+                position: absolute;
+                top: var(--navbar-height); /* Position below the navbar */
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 12, 30, 0.98);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid var(--border-color);
+                padding: 15px 0;
+                z-index: 999; /* Sits below fixed navbar but above page content */
+                box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            }
+            .navbar.mobile-menu-open .nav-links-content {
+                display: flex; /* Show when menu is open */
+            }
+            .nav-links-content a {
+                margin: 12px 0; /* Vertical spacing for touch, remove horizontal */
+                font-size: 1.1em; 
+                padding: 5px 0;
+                width: 100%; /* Make links take full width */
+                text-align: center; /* Center text in links */
+            }
+            
+            .lang-switch {
+                order: 1; /* Before hamburger in mobile */
+                margin-left: 0; /* Reset desktop margin */
+                margin-right: 15px; /* Space before hamburger */
+                padding: 6px 10px; /* Slightly smaller for mobile bar */
+                font-size: 0.9em;
+            }
+            
+            /* Hamburger animation to X */
+            .navbar.mobile-menu-open .hamburger-menu__line:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+            .navbar.mobile-menu-open .hamburger-menu__line:nth-child(2) {
+                opacity: 0;
+            }
+            .navbar.mobile-menu-open .hamburger-menu__line:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+
+            /* General content adjustments */
+            h1#mainHeading { font-size: 1.8em; }
+            .container { padding: 20px; }
+            .form-group label { font-size: 0.95em; }
+            textarea, input[type="password"] { font-size: 0.95em; padding: 10px; }
+            .action-buttons button { font-size: 0.95em; padding: 10px; }
+            .mode-switcher button { font-size: 0.75em; padding: 8px; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar { padding: 0 10px; }
+            
+            h1#mainHeading { font-size: 1.5em; }
+            .mode-switcher { flex-direction: column; }
+            .action-buttons { flex-direction: column; }
+            textarea { min-height: 70px; }
+            #outputText { min-height: 70px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand" id="navBrand">SB TEXTO</div>
+
+        <div class="navbar-main-right">
+            <div class="nav-links-content" id="navLinksContent">
+                <a href="https://www.instagram.com/sandeepbiswalg/" target="_blank" id="navLink1">ମୋତେ ଫଲୋ କରନ୍ତୁ</a>
+                <a href="https://sbcall.netlify.app/od/" target="_blank" id="navLink2">ଏସ୍‌ବି ଭିଡିଓ କଲ୍</a>
+                <a href="https://sbsstv.netlify.app/" target="_blank" id="navLink3">ଏସ୍‌ବି ଏସ୍‌ଏସ୍‌ଟିଭି ଏନକୋଡେର</a>
+            </div>
+            <button id="langSwitchBtn" class="lang-switch">E</button>
+            <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle menu" aria-expanded="false">
+                <span class="hamburger-menu__line"></span>
+                <span class="hamburger-menu__line"></span>
+                <span class="hamburger-menu__line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 id="mainHeading">ବିରଳ ସନ୍ଦେଶ</h1>
+
+        <div class="mode-switcher">
+            <button id="encryptModeBtn" class="active">Encrypt Mode</button>
+            <button id="decryptModeBtn">Decrypt Mode</button>
+        </div>
+
+        <div class="form-group">
+            <label for="inputText" id="inputLabel">Enter Text to Encrypt:</label>
+            <textarea id="inputText" rows="3" placeholder="Type your secret message here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="password" id="passwordLabel">Password (Optional):</label>
+            <input type="password" id="password" placeholder="Leave empty for no password">
+        </div>
+
+        <div class="action-buttons">
+            <button id="processBtn">Encrypt Text</button>
+        </div>
+
+        <div class="form-group output-container">
+            <label for="outputText" id="outputLabel">Scrambled Output:</label>
+            <textarea id="outputText" rows="3" readonly placeholder="Processed text will appear here..."></textarea>
+            <div class="action-buttons">
+                 <button id="copyBtn">Copy Output</button>
+            </div>
+        </div>
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <footer id="footer">
+        <p>© 2023 Futuristic Scrambler. Design by AI & Human.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const pageTitleEl = document.getElementById('pageTitle');
+            const navBrandEl = document.getElementById('navBrand');
+            const navLink1El = document.getElementById('navLink1');
+            const navLink2El = document.getElementById('navLink2');
+            const navLink3El = document.getElementById('navLink3');
+            const langSwitchBtnEl = document.getElementById('langSwitchBtn');
+            
+            const mainHeadingEl = document.getElementById('mainHeading');
+            const inputTextEl = document.getElementById('inputText');
+            const outputTextEl = document.getElementById('outputText');
+            const passwordInputEl = document.getElementById('password');
+            const processBtnEl = document.getElementById('processBtn');
+            const copyBtnEl = document.getElementById('copyBtn');
+            const encryptModeBtnEl = document.getElementById('encryptModeBtn');
+            const decryptModeBtnEl = document.getElementById('decryptModeBtn');
+            const inputLabelEl = document.getElementById('inputLabel');
+            const outputLabelEl = document.getElementById('outputLabel');
+            const passwordLabelEl = document.getElementById('passwordLabel');
+            const customCursorEl = document.getElementById('custom-cursor');
+            const statusMessageEl = document.getElementById('statusMessage');
+            const footerEl = document.getElementById('footer');
+
+            const navbarEl = document.getElementById('navbar');
+            const hamburgerMenuBtn = document.getElementById('hamburgerMenu');
+            const navLinksContentEl = document.getElementById('navLinksContent');
+
+            // --- State ---
+            let currentMode = 'encrypt';
+            let currentLanguage = 'odia'; // Default language
+
+            // --- Determine initial language from URL ---
+            const queryString = window.location.search;
+            if (queryString === '?en') {
+                currentLanguage = 'english';
+            } else if (queryString === '?od') {
+                currentLanguage = 'odia';
+            } // If no query string or unknown, defaults to 'odia'
+
+            const currentYear = new Date().getFullYear();
+
+            // --- Language Strings (unchanged) ---
+            const uiStrings = {
+                odia: {
+                    pageTitle: `SB TEXTO - ବିରଳ ସନ୍ଦେଶ`,
+                    navBrand: "ଏସ୍‌ବି ଟେକ୍ସ୍ଟୋ",
+                    navLink1: "ମୋତେ ଫଲୋ କରନ୍ତୁ",
+                    navLink2: "ଏସ୍‌ବି ଭିଡିଓ କଲ୍",
+                    navLink3: "ଏସ୍‌ବି ଏସ୍‌ଏସ୍‌ଟିଭି ଏନକୋଡର୍",
+                    langSwitchTo: "E", 
+                    mainHeading: "ବିରଳ ସନ୍ଦେଶ",
+                    encryptMode: "ଗୁପ୍ତ ସନ୍ଦେଶ କାର୍ଯ",
+                    decryptMode: "ଗୁପ୍ତ ସନ୍ଦେଶ ଖୋଲିବା କାର୍ଯ",
+                    inputLabelEncrypt: "ଗୁପ୍ତ ସନ୍ଦେଶ ପାଇଁ ପାଠ୍ୟ ଦିଅନ୍ତୁ:",
+                    inputLabelDecrypt: "ଗୁପ୍ତ ସନ୍ଦେଶ ଖୋଲିବା ପାଇଁ ଶବ୍ଦ ଦିଅନ୍ତୁ:",
+                    inputTextPlaceholderEncrypt: "ଆପଣଙ୍କ ସନ୍ଦେଶ ଗୁପ୍ତ କରିବା ପାଇଁ ଏଠାରେ ଲେଖନ୍ତୁ...",
+                    inputTextPlaceholderDecrypt: "ଆପଣଙ୍କ ଗୁପ୍ତ ଶବ୍ଦ ଏଠାରେ ପେଷ୍ଟ କରନ୍ତୁ...",
+                    passwordLabel: "ପାସୱାର୍ଡ (ଇଚ୍ଛା ଥିଲେ ଦିଅ):",
+                    passwordPlaceholder: "ପାସୱାର୍ଡ ବିନା ଖାଲି ଛାଡନ୍ତୁ",
+                    processBtnEncrypt: "ସନ୍ଦେଶ କୁ ଗୁପ୍ତ କରନ୍ତୁ",
+                    processBtnDecrypt: "ଗୁପ୍ତ ସନ୍ଦେଶ କୁ ଦେଖନ୍ତୁ",
+                    outputLabelEncrypt: "ଗୁପ୍ତ ସନ୍ଦେଶ ଫଳାଫଳ:",
+                    outputLabelDecrypt: "ଗୁପ୍ତ ହୋଇଥିବା ପାଠ୍ୟ:",
+                    outputTextPlaceholder: "ପ୍ରକ୍ରିୟାକୃତ ପାଠ୍ୟ ଏଠାରେ ଦେଖାଯିବ...",
+                    copyBtn: "ଫଳାଫଳ କପି କରନ୍ତୁ",
+                    copyBtnCopied: "ଫଳାଫଳ କପି ହେଲା!",
+                    statusEmptyInput: "ଭିତରକରଣ ଖାଲି ହୋଇପାରିବ ନାହିଁ",
+                    statusEncSuccess: "ଗୁପ୍ତ କରିବାରେ ସଫଳ!",
+                    statusDecSuccess: "ଗୁପ୍ତ ସନ୍ଦେଶ ଦେଖିବାରେ ସଫଳ!",
+                    statusErrorPrefix: "ତ୍ରୁଟି: ",
+                    statusCopySuccess: "ଫଳାଫଳ କ୍ଲିପବୋର୍ଡକୁ କପି ହେଲା!",
+                    statusCopyError: "ଫଳାଫଳ କପି କରିବାରେ ବିଫଳ",
+                    statusNothingToCopy: "କପି କରିବାକୁ କିଛି ନାହିଁ",
+                    statusPwRequired: "ଗୁପ୍ତ ସନ୍ଦେଶ ଦେଖିବା ପାଇଁ ପାସୱାର୍ଡ ଆବଶ୍ୟକ, କିନ୍ତୁ ଦିଆଯାଇ ନାହିଁ",
+                    statusPwNotNeeded: "ପାସୱାର୍ଡ ଦିଆଯାଇଛି, କିନ୍ତୁ ସନ୍ଦେଶଟି ପାସୱାର୍ଡ ସହିତ ଗୁପ୍ତ ହୋଇନଥିଲା। ବିନା ଚାବିରେ ଗୁପ୍ତ କରିବାକୁ ଚେଷ୍ଟା କରୁଛି",
+                    statusUnknownMarker: "ଅଜ୍ଞାତ ଗୁପ୍ତ ପାଠ୍ୟ ମାର୍କର୍। ଡାଟା କ୍ଷତିଗ୍ରସ୍ତ ହୋଇପାରେ କିମ୍ବା ଏକ ଭିନ୍ନ ସିଷ୍ଟମରୁ ଆସିଥାଇପାରେ।",
+                    statusInvalidFormat: "ଅବୈଧ ଗୁପ୍ତ ପାଠ୍ୟ ଶୈଳୀ। ମାର୍କର୍ କିମ୍ବା ବିଷୟବସ୍ତୁ ନିଖୋଜ।",
+                    statusEmptyWordGroup: (index) => `ସୂଚକାଙ୍କ ${index} ରେ ଖାଲି ଶବ୍ଦ ସମୂହ। ଅବୈଧ ଶୈଳୀ।`,
+                    statusInvalidWord: (word) => `କ୍ରମରେ ଅବୈଧ ଶବ୍ଦ: '${word}'। ଶବ୍ଦକୋଷ ମେଳ ଖାଉ ନାହିଁ `,
+                    statusInternalPwError: "ଆଭ୍ୟନ୍ତରୀଣ ତ୍ରୁଟି: PW_MARKER ଗୁପ୍ତ ସନ୍ଦେଶ ଖୋଲିବା ପାଇଁ ପାସୱାର୍ଡ ଚାବି ନିଖୋଜ।",
+                    footerText: `© ${currentYear} ସନ୍ଦୀପ୍ ବିଶ୍ବାଳ ଜି`
+                },
+                english: {
+                    pageTitle: `SB TEXTO - Birala Sandesha`,
+                    navBrand: "SB TEXTO",
+                    navLink1: "Follow me",
+                    navLink2: "SB Video Call",
+                    navLink3: "SB SSTV Encoder",
+                    langSwitchTo: "ଓ", 
+                    mainHeading: "Birala Sandesha",
+                    encryptMode: "Encrypt Mode",
+                    decryptMode: "Decrypt Mode",
+                    inputLabelEncrypt: "Enter Text to Encrypt:",
+                    inputLabelDecrypt: "Enter Scrambled Words to Decrypt:",
+                    inputTextPlaceholderEncrypt: "Type your secret message here...",
+                    inputTextPlaceholderDecrypt: "Paste your scrambled words here...",
+                    passwordLabel: "Password (Optional):",
+                    passwordPlaceholder: "Leave empty for no password",
+                    processBtnEncrypt: "Encrypt Text",
+                    processBtnDecrypt: "Decrypt Words",
+                    outputLabelEncrypt: "Scrambled Output:",
+                    outputLabelDecrypt: "Decrypted Text:",
+                    outputTextPlaceholder: "Processed text will appear here...",
+                    copyBtn: "Copy Output",
+                    copyBtnCopied: "Copied!",
+                    statusEmptyInput: "Input cannot be empty.",
+                    statusEncSuccess: "Encryption successful!",
+                    statusDecSuccess: "Decryption successful!",
+                    statusErrorPrefix: "Error: ",
+                    statusCopySuccess: "Output copied to clipboard!",
+                    statusCopyError: "Failed to copy output.",
+                    statusNothingToCopy: "Nothing to copy.",
+                    statusPwRequired: "Password required for decryption, but none provided.",
+                    statusPwNotNeeded: "Password provided, but message was not encrypted with one. Attempting keyless decryption.",
+                    statusUnknownMarker: "Unknown encryption marker. Data may be corrupted or from a different system.",
+                    statusInvalidFormat: "Invalid scrambled text format. Missing marker or content.",
+                    statusEmptyWordGroup: (index) => `Empty word group at index ${index}. Invalid format.`,
+                    statusInvalidWord: (word) => `Invalid word in sequence: '${word}'. Dictionary mismatch?`,
+                    statusInternalPwError: "Internal error: Password key missing for PW_MARKER decryption.",
+                    footerText: `© ${currentYear} Sandeep Biswal G.`
+                }
+            };
+
+            // --- Word Dictionary (unchanged) ---
+            const wordDictionary = [
+               "ବିଜୁଳି", "ପ୍ରବାହ", "ହେଲା", "ତ୍ରୁଟି", "ଦିଗ", "ପ୍ରତିନିଧି", "ନାମ", "ଜାଲ", "ସଙ୍ଗୀତ", "ଯନ୍ତ୍ର",
+                "ନଦୀ", "ଗଠନ", "ଖଣ୍ଡ", "ନେଲା", "ସୁନ୍ଦର", "ସ୍ପନ୍ଦନ", "ସିଦ୍ଧାନ୍ତ", "ଶିଖର", "ପ୍ରାଚୀନତା", "ଛାୟା",
+                "ଆଲୋକ", "ନବୁ", "କକ୍ଷ", "ତାରା", "ଧୁଳି", "ଅଣୁ", "ଅନ୍ତରୀପ", "ଚିହ୍ନ", "ଶେଷ", "ଆରମ୍ଭ",
+                "ପରୀକ୍ଷା", "ତୃତୀୟ", "ବିନ୍ଦୁ", "ଅଙ୍କ", "ତରଙ୍ଗ", "ପ୍ରମାଣ", "ଗ୍ୟାସ", "ପ୍ରଭା", "କିରଣ", "ଧୂମ",
+                "ଧରା", "ଜଳ", "ଅଗ୍ନି", "ବାୟୁ", "ଆତ୍ମା", "ଜୀବନ", "ଦେହ", "ଛାୟାପଥ", "ଉଜ୍ଜ୍ୱଳ", "ରାତି",
+                "ସୂର୍ଯ୍ୟ", "ଚନ୍ଦ୍ର", "ନକ୍ଷତ୍ର", "ବ୍ରହ୍ମାଣ୍ଡ", "ସରଳ", "ଦୁଖ", "ସମୟ", "ବିଡି", "ସମାପ୍ତି", "ଅଗ୍ରଗତି",
+                "ସତ୍ୟ", "ମିଥ୍ୟା", "ହିସାବ", "ଅନୁଭବ", "ପୁସ୍ତକ", "ଲେଖନ", "ନିୟମ", "ତଥ୍ୟ", "ସୂଚନା", 
+                "ସ୍ନାୟୁ", "ସଂଯୋଗ", "ବୃତ୍ତ", "ଅଂଶ", "ରାସ୍ତାରେ", "ଶୂନ୍ୟ", "ପ୍ରତିଧ୍ୱନି", "କ୍ଷେତ୍ର", "ମୂଳ", "କେନ୍ଦ୍ର"
+            ];
+            const DICT_SIZE = wordDictionary.length;
+            const PW_MARKER = "ଚାଲୁ";
+            const NO_PW_MARKER = "ବେଡୁ";
+            const CHAR_SEPARATOR = " ରେ ";
+            const WORD_PART_SEPARATOR = " ହେଲା ";
+
+            // --- Function to update URL based on language ---
+            function updateURLForLanguage(lang) {
+                const langQuery = lang === 'odia' ? '?od' : '?en';
+                const newUrl = `${window.location.pathname}${langQuery}${window.location.hash}`;
+                // Using replaceState to avoid polluting browser history for simple language switches
+                // and to prevent page reload.
+                window.history.replaceState({ path: newUrl }, '', newUrl);
+            }
+
+            // --- UI Update Functions ---
+            function updateUIText() {
+                const S = uiStrings[currentLanguage];
+
+                pageTitleEl.textContent = S.pageTitle;
+                navBrandEl.textContent = S.navBrand;
+                navLink1El.textContent = S.navLink1;
+                navLink2El.textContent = S.navLink2;
+                navLink3El.textContent = S.navLink3;
+                langSwitchBtnEl.textContent = S.langSwitchTo;
+                
+                mainHeadingEl.textContent = S.mainHeading;
+                encryptModeBtnEl.textContent = S.encryptMode;
+                decryptModeBtnEl.textContent = S.decryptMode;
+                passwordLabelEl.textContent = S.passwordLabel;
+                passwordInputEl.placeholder = S.passwordPlaceholder;
+                outputTextEl.placeholder = S.outputTextPlaceholder;
+                
+                if (copyBtnEl.textContent !== S.copyBtnCopied) {
+                    copyBtnEl.textContent = S.copyBtn;
+                } else {
+                     copyBtnEl.textContent = S.copyBtnCopied;
+                }
+                footerEl.innerHTML = `<p>${S.footerText}</p>`;
+                switchMode(currentMode, true); // Update mode-specific texts
+
+                // ADDED: Update URL after UI texts are set
+                updateURLForLanguage(currentLanguage);
+            }
+
+            function switchMode(mode, isLanguageSwitch = false) {
+                currentMode = mode;
+                const S = uiStrings[currentLanguage];
+
+                if (!isLanguageSwitch) {
+                    inputTextEl.value = '';
+                    outputTextEl.value = '';
+                    passwordInputEl.value = '';
+                    clearStatus();
+                }
+
+                if (mode === 'encrypt') {
+                    encryptModeBtnEl.classList.add('active');
+                    decryptModeBtnEl.classList.remove('active');
+                    processBtnEl.textContent = S.processBtnEncrypt;
+                    inputLabelEl.textContent = S.inputLabelEncrypt;
+                    outputLabelEl.textContent = S.outputLabelEncrypt;
+                    inputTextEl.placeholder = S.inputTextPlaceholderEncrypt;
+                    customCursorEl.style.borderColor = 'var(--primary-glow)';
+                } else {
+                    decryptModeBtnEl.classList.add('active');
+                    encryptModeBtnEl.classList.remove('active');
+                    processBtnEl.textContent = S.processBtnDecrypt;
+                    inputLabelEl.textContent = S.inputLabelDecrypt;
+                    outputLabelEl.textContent = S.outputLabelDecrypt;
+                    inputTextEl.placeholder = S.inputTextPlaceholderDecrypt;
+                    customCursorEl.style.borderColor = 'var(--secondary-glow)';
+                }
+            }
+            
+            function showStatus(messageKey, type = 'info', interpolateArg = null) {
+                let message = uiStrings[currentLanguage][messageKey] || messageKey;
+                if (typeof message === 'function') {
+                    message = message(interpolateArg);
+                } else if (messageKey === 'statusErrorGeneric') { // Assuming you might add a generic error key
+                     message = `${uiStrings[currentLanguage].statusErrorPrefix}${interpolateArg}`;
+                }
+
+
+                statusMessageEl.textContent = message;
+                statusMessageEl.className = `status-message ${type}`;
+                statusMessageEl.style.display = 'block';
+            }
+
+            function clearStatus() {
+                statusMessageEl.style.display = 'none';
+                statusMessageEl.textContent = '';
+                statusMessageEl.className = 'status-message';
+            }
+
+            // --- Custom Cursor & Trail (unchanged) ---
+            document.addEventListener('mousemove', (e) => {
+                customCursorEl.style.left = e.clientX + 'px';
+                customCursorEl.style.top = e.clientY + 'px';
+
+                const trail = document.createElement('div');
+                trail.className = 'mouse-trail';
+                document.body.appendChild(trail);
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                trail.style.backgroundColor = Math.random() > 0.5 ? 'var(--primary-glow)' : 'var(--secondary-glow)';
+
+                setTimeout(() => {
+                    trail.style.opacity = '0';
+                    trail.style.transform = 'translate(-50%, -50%) scale(0.3)';
+                }, 50);
+                setTimeout(() => {
+                    if (document.body.contains(trail)) document.body.removeChild(trail);
+                }, 650);
+            });
+            document.addEventListener('mousedown', () => customCursorEl.classList.add('active'));
+            document.addEventListener('mouseup', () => customCursorEl.classList.remove('active'));
+
+            // --- Event Listeners (langSwitchBtnEl listener remains the same, it calls updateUIText) ---
+            langSwitchBtnEl.addEventListener('click', () => {
+                currentLanguage = (currentLanguage === 'odia') ? 'english' : 'odia';
+                updateUIText(); // This will now also update the URL
+            });
+
+            encryptModeBtnEl.addEventListener('click', () => switchMode('encrypt'));
+            decryptModeBtnEl.addEventListener('click', () => switchMode('decrypt'));
+
+            processBtnEl.addEventListener('click', () => {
+                const text = inputTextEl.value;
+                const password = passwordInputEl.value.trim();
+                clearStatus();
+
+                if (!text.trim()) {
+                    showStatus("statusEmptyInput", "error");
+                    return;
+                }
+
+                try {
+                    if (currentMode === 'encrypt') {
+                        outputTextEl.value = encrypt(text, password ? password : null);
+                        if (outputTextEl.value) showStatus("statusEncSuccess", "success");
+                    } else {
+                        outputTextEl.value = decrypt(text, password ? password : null);
+                        if (outputTextEl.value) showStatus("statusDecSuccess", "success");
+                    }
+                } catch (error) {
+                    console.error("Processing error:", error);
+                    let messageKey = error.message;
+                    let interpolate = null;
+                    if (error.customData) {
+                        messageKey = error.message;
+                        interpolate = error.customData;
+                    }
+
+                    if (uiStrings[currentLanguage][messageKey]) {
+                         showStatus(messageKey, "error", interpolate);
+                    } else {
+                         // Fallback for generic errors if not specifically handled by uiStrings
+                         showStatus("statusErrorGeneric", "error", error.message);
+                    }
+                    outputTextEl.value = '';
+                }
+            });
+
+            copyBtnEl.addEventListener('click', () => {
+                const S = uiStrings[currentLanguage];
+                if (outputTextEl.value) {
+                    navigator.clipboard.writeText(outputTextEl.value)
+                        .then(() => {
+                            showStatus('statusCopySuccess', 'success');
+                            copyBtnEl.textContent = S.copyBtnCopied;
+                            setTimeout(() => copyBtnEl.textContent = S.copyBtn, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Failed to copy: ', err);
+                            showStatus('statusCopyError', 'error');
+                        });
+                } else {
+                    showStatus('statusNothingToCopy', 'error');
+                }
+            });
+            
+            // --- Mobile Menu Toggle (unchanged) ---
+            if (hamburgerMenuBtn && navbarEl && navLinksContentEl) {
+                hamburgerMenuBtn.addEventListener('click', () => {
+                    navbarEl.classList.toggle('mobile-menu-open');
+                    const isExpanded = navbarEl.classList.contains('mobile-menu-open');
+                    hamburgerMenuBtn.setAttribute('aria-expanded', isExpanded.toString());
+                });
+
+                navLinksContentEl.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'A') { 
+                        if (navbarEl.classList.contains('mobile-menu-open')) {
+                            navbarEl.classList.remove('mobile-menu-open');
+                            hamburgerMenuBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            }
+
+
+            // --- Core Logic (unchanged) ---
+            function getPasswordKeyArray(password) {
+                if (!password) return null;
+                let keyArray = [];
+                for (let i = 0; i < password.length; i++) {
+                    keyArray.push(password.charCodeAt(i));
+                }
+                return keyArray.length > 0 ? keyArray : null;
+            }
+
+            function numberToBaseNWords(num) {
+                if (num === 0) return [wordDictionary[0]];
+                if (num < 0) throw new Error("Cannot encode negative numbers directly."); // Consider localizing if thrown to user
+                const words = [];
+                let currentNum = num;
+                while (currentNum > 0) {
+                    words.unshift(wordDictionary[currentNum % DICT_SIZE]);
+                    currentNum = Math.floor(currentNum / DICT_SIZE);
+                }
+                return words.length > 0 ? words : [wordDictionary[0]];
+            }
+
+            function baseNWordsToNumber(wordsArray) {
+                let num = 0;
+                for (const word of wordsArray) {
+                    const index = wordDictionary.indexOf(word);
+                    if (index === -1) {
+                        const err = new Error('statusInvalidWord');
+                        err.customData = word;
+                        throw err;
+                    }
+                    num = num * DICT_SIZE + index;
+                }
+                return num;
+            }
+            
+            const NO_PW_SHIFT_BASE = 37;
+
+            function encrypt(text, password) {
+                const passwordKeyArr = getPasswordKeyArray(password);
+                let encryptedCharsWords = [];
+
+                for (let i = 0; i < text.length; i++) {
+                    let charCode = text.charCodeAt(i);
+
+                    if (passwordKeyArr) {
+                        const keyChar = passwordKeyArr[i % passwordKeyArr.length];
+                        charCode = charCode ^ keyChar;
+                    } else {
+                        charCode = (charCode + NO_PW_SHIFT_BASE + (i % 13)) % 65536; 
+                    }
+
+                    const wordsForChar = numberToBaseNWords(charCode);
+                    encryptedCharsWords.push(wordsForChar.join(WORD_PART_SEPARATOR));
+                }
+                const prefix = passwordKeyArr ? PW_MARKER : NO_PW_MARKER;
+                return prefix + CHAR_SEPARATOR + encryptedCharsWords.join(CHAR_SEPARATOR);
+            }
+
+            function decrypt(scrambledText, password) {
+                const mainParts = scrambledText.split(CHAR_SEPARATOR);
+                if (mainParts.length < 2) throw new Error("statusInvalidFormat");
+
+                const prefix = mainParts.shift();
+                const encryptedCharsWordsGroups = mainParts;
+                const passwordKeyArr = getPasswordKeyArray(password);
+
+                if (prefix === PW_MARKER && !passwordKeyArr) throw new Error("statusPwRequired");
+                if (prefix === NO_PW_MARKER && passwordKeyArr) {
+                     // Use console.warn as it's a notice, not a critical error for the user UI
+                    console.warn(uiStrings[currentLanguage]?.statusPwNotNeeded || uiStrings.english.statusPwNotNeeded);
+                    // Optionally show a non-error status message if desired:
+                    // showStatus('statusPwNotNeeded', 'info'); // 'info' could be a new style
+                }
+                if (prefix !== PW_MARKER && prefix !== NO_PW_MARKER) throw new Error("statusUnknownMarker");
+
+                let decryptedText = "";
+                for (let i = 0; i < encryptedCharsWordsGroups.length; i++) {
+                    const wordGroupString = encryptedCharsWordsGroups[i];
+                    if (!wordGroupString) {
+                        if (i === encryptedCharsWordsGroups.length - 1 && encryptedCharsWordsGroups.length > 1) continue;
+                        const err = new Error('statusEmptyWordGroup');
+                        err.customData = i;
+                        throw err;
+                    }
+
+                    const wordsArray = wordGroupString.split(WORD_PART_SEPARATOR);
+                    let charCode = baseNWordsToNumber(wordsArray);
+
+                    if (prefix === PW_MARKER) {
+                         if (!passwordKeyArr) throw new Error("statusInternalPwError"); // Should be caught by earlier check but good for robustness
+                        const keyChar = passwordKeyArr[i % passwordKeyArr.length];
+                        charCode = charCode ^ keyChar;
+                    } else if (prefix === NO_PW_MARKER) {
+                        charCode = (charCode - NO_PW_SHIFT_BASE - (i % 13) + 65536 * 2) % 65536;
+                    }
+                    decryptedText += String.fromCharCode(charCode);
+                }
+                return decryptedText;
+            }
+
+            // --- Initialize ---
+            updateUIText(); // This will set initial UI text AND update URL based on detected/default language
+        });
+    </script>
+</body>
+</html>
