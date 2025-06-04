@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SB TEXTO - Birala Sandesha | Now Do Secret Chat</title>
-  <meta name="description" content="SB TEXTO - Birala Sandesha is a unique message encryption tool that lets you hide your chats in plain sight. Type your secret message, encrypt it, and share it securely.">
-  <meta name="keywords" content="SB TEXTO, Birala Sandesha, secret chat, encrypt message, decrypt, hidden message tool, private texting, coded message, text encryption">
-  <meta name="author" content="Sandeep Biswal G">
+    <!-- head was duplicated, removed one -->
+    <title>SB TEXTO - Birala Sandesha | Now Do Secret Chat</title>
+    <meta name="description" content="SB TEXTO - Birala Sandesha is a unique message encryption tool that lets you hide your chats in plain sight. Type your secret message, encrypt it, and share it securely. Works offline.">
+    <meta name="keywords" content="SB TEXTO, Birala Sandesha, secret chat, encrypt message, decrypt, hidden message tool, private texting, coded message, text encryption, offline encryption">
+    <meta name="author" content="Sandeep Biswal G">
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="SB TEXTO - Birala Sandesha">
-  <meta property="og:description" content="Now Do Secret Chat - Hide your messages in plain sight using SB TEXTO. Encrypt and decrypt text easily.">
-  <meta property="og:image" content="https://imsbg.github.io/SBTEXTO/sb.png"> <!-- Replace with your image URL -->
-  <meta property="og:url" content="https://imsbg.github.io/SBTEXTO/"> <!-- Replace with your site URL -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SB TEXTO - Birala Sandesha">
+    <meta property="og:description" content="Now Do Secret Chat - Hide your messages in plain sight using SB TEXTO. Encrypt and decrypt text easily. Works offline.">
+    <meta property="og:image" content="https://imsbg.github.io/SBTEXTO/sb.png">
+    <meta property="og:url" content="https://imsbg.github.io/SBTEXTO/">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SB TEXTO - Birala Sandesha">
-  <meta name="twitter:description" content="Now Do Secret Chat - Send secret messages with unique encryption that only you can decrypt.">
-  <meta name="twitter:image" content="https://imsbg.github.io/SBTEXTO/sb.png"> <!-- Replace with your image URL -->
-</head>
-<link rel="icon" type="image/png" href="logo.png">
-    <title id="pageTitle">SB TEXTO - Birala Sandesha</title>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SB TEXTO - Birala Sandesha">
+    <meta name="twitter:description" content="Now Do Secret Chat - Send secret messages with unique encryption that only you can decrypt. Works offline.">
+    <meta name="twitter:image" content="https://imsbg.github.io/SBTEXTO/sb.png">
+    
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- <title id="pageTitle">SB TEXTO - Birala Sandesha</title> -- This is dynamically set -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@100..900&display=swap" rel="stylesheet">
@@ -61,7 +59,7 @@
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden;
-            cursor: none;
+            cursor: none; /* Default to no cursor for desktop */
             background-image:
                 radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(255, 0, 200, 0.05) 0%, transparent 40%),
@@ -146,8 +144,8 @@
             font-size: 1em;
             transition: color 0.3s, text-shadow 0.3s;
         }
-        .nav-links-content a:first-child { /* Remove margin for the first link if desired or use padding on parent */
-            /* margin-left: 0; */
+        .nav-links-content a:first-child { 
+             /* margin-left: 0; */
         }
 
         .nav-links-content a:hover {
@@ -399,6 +397,7 @@
             font-size: 0.85em;
             color: var(--border-color);
             opacity: 0.7;
+            text-align: center; /* Center footer content */
         }
         footer a {
             color: var(--primary-glow);
@@ -407,6 +406,65 @@
         footer a:hover {
             text-decoration: underline;
         }
+        
+        /* Styles for Legal Content Modal */
+        #legal-content-overlay {
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.85); 
+            z-index: 1050; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+            overflow-y: auto;
+        }
+        #legal-content-box {
+            background-color: var(--background-medium); 
+            color: var(--text-color); 
+            padding: 25px 35px; 
+            border-radius: 12px; 
+            max-width: 800px; 
+            width: 90%; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            border: 1px solid var(--border-color); 
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            font-family: "Noto Sans Oriya", sans-serif;
+        }
+        #legal-content-box h2 {
+            color: var(--primary-glow); 
+            margin-bottom: 20px; 
+            font-size: 1.8em;
+            text-shadow: 0 0 8px var(--primary-glow);
+        }
+        #legal-content-box p {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        #closeLegalBtn {
+            margin-top: 25px; 
+            padding: 10px 25px; 
+            background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+            background-size: 200% 200%;
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            font-family: "Noto Sans Oriya", sans-serif; 
+            cursor: pointer; /* Explicitly pointer for this button */
+            font-weight: bold;
+            font-size: 1em;
+            transition: transform 0.2s, box-shadow 0.3s, background-position 0.5s;
+        }
+        #closeLegalBtn:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 242, 255, 0.25);
+        }
+
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -457,7 +515,6 @@
                 font-size: 0.9em;
             }
             
-            /* Hamburger animation to X */
             .navbar.mobile-menu-open .hamburger-menu__line:nth-child(1) {
                 transform: translateY(7px) rotate(45deg);
             }
@@ -468,28 +525,48 @@
                 transform: translateY(-7px) rotate(-45deg);
             }
 
-            /* General content adjustments */
             h1#mainHeading { font-size: 1.8em; }
             .container { padding: 20px; }
             .form-group label { font-size: 0.95em; }
             textarea, input[type="password"] { font-size: 0.95em; padding: 10px; }
             .action-buttons button { font-size: 0.95em; padding: 10px; }
             .mode-switcher button { font-size: 0.75em; padding: 8px; }
+
+            #legal-content-box h2 { font-size: 1.5em; }
+            #legal-content-box { padding: 20px; max-height: 80vh;}
         }
 
         @media (max-width: 480px) {
             .navbar { padding: 0 10px; }
-            
+            .nav-brand { font-size: 1.3em; }
             h1#mainHeading { font-size: 1.5em; }
             .mode-switcher { flex-direction: column; }
             .action-buttons { flex-direction: column; }
             textarea { min-height: 70px; }
             #outputText { min-height: 70px; }
+            #legal-content-box h2 { font-size: 1.3em; }
+             .nav-links-content a { font-size: 1em; margin: 10px 0;}
+        }
+
+        /* Styles for disabling mouse effects on touch/mobile */
+        @media (hover: none) and (pointer: coarse), (max-width: 768px) {
+            body, textarea, input[type="password"], .mode-switcher button, 
+            .action-buttons button, .lang-switch, .hamburger-menu, 
+            .nav-links-content a { /* Added nav links */
+                cursor: auto !important; 
+            }
+            #custom-cursor {
+                display: none !important;
+            }
+            /* Mouse trails are prevented by JS, but this is a fallback */
+            .mouse-trail {
+                display: none !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="custom-cursor"></div>
+    <div id="custom-cursor"></div> <!-- Stays for desktop -->
 
     <nav class="navbar" id="navbar">
         <div class="nav-brand" id="navBrand">SB TEXTO</div>
@@ -499,6 +576,8 @@
                 <a href="https://www.instagram.com/sandeepbiswalg/" target="_blank" id="navLink1">ମୋତେ ଫଲୋ କରନ୍ତୁ</a>
                 <a href="https://sbcall.netlify.app/od/" target="_blank" id="navLink2">ଏସ୍‌ବି ଭିଡିଓ କଲ୍</a>
                 <a href="https://sbsstv.netlify.app/" target="_blank" id="navLink3">ଏସ୍‌ବି ଏସ୍‌ଏସ୍‌ଟିଭି ଏନକୋଡେର</a>
+                <a href="#" id="navLinkTerms">Terms</a>
+                <a href="#" id="navLinkPrivacy">Privacy</a>
             </div>
             <button id="langSwitchBtn" class="lang-switch">E</button>
             <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle menu" aria-expanded="false">
@@ -541,14 +620,26 @@
         <div id="statusMessage" class="status-message"></div>
     </div>
 
+    <div id="legal-content-overlay">
+        <div id="legal-content-box">
+            <h2 id="legal-title"></h2>
+            <div id="legal-text">
+                <!-- Content will be injected here by JS -->
+            </div>
+            <button id="closeLegalBtn">Close</button>
+        </div>
+    </div>
+
     <footer id="footer">
-        <p>© 2023 Futuristic Scrambler. Design by AI & Human.</p>
+        <!-- Content dynamically set by JS -->
+        <p><a href="#" id="footerLinkTerms" style="margin-right: 15px;">Terms & Conditions</a>
+           <a href="#" id="footerLinkPrivacy">Privacy Policy</a></p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- DOM Elements ---
-            const pageTitleEl = document.getElementById('pageTitle');
+            const pageTitleEl = document.getElementById('pageTitle'); // This ID is not in HTML, title tag is set directly
             const navBrandEl = document.getElementById('navBrand');
             const navLink1El = document.getElementById('navLink1');
             const navLink2El = document.getElementById('navLink2');
@@ -574,9 +665,21 @@
             const hamburgerMenuBtn = document.getElementById('hamburgerMenu');
             const navLinksContentEl = document.getElementById('navLinksContent');
 
+            // New DOM elements for legal content
+            const navLinkTermsEl = document.getElementById('navLinkTerms');
+            const navLinkPrivacyEl = document.getElementById('navLinkPrivacy');
+            const footerLinkTermsEl = document.getElementById('footerLinkTerms');
+            const footerLinkPrivacyEl = document.getElementById('footerLinkPrivacy');
+            const legalOverlayEl = document.getElementById('legal-content-overlay');
+            const legalTitleEl = document.getElementById('legal-title');
+            const legalTextEl = document.getElementById('legal-text');
+            const closeLegalBtnEl = document.getElementById('closeLegalBtn');
+
             // --- State ---
             let currentMode = 'encrypt';
             let currentLanguage = 'odia'; // Default language
+            let currentLegalPage = null; // To track if 'terms' or 'privacy' modal is open
+            const isFinePointer = window.matchMedia("(pointer: fine)").matches; // Check for mouse-like pointer
 
             // --- Determine initial language from URL ---
             const queryString = window.location.search;
@@ -584,18 +687,20 @@
                 currentLanguage = 'english';
             } else if (queryString === '?od') {
                 currentLanguage = 'odia';
-            } // If no query string or unknown, defaults to 'odia'
+            } 
 
             const currentYear = new Date().getFullYear();
 
-            // --- Language Strings (unchanged) ---
+            // --- Language Strings ---
             const uiStrings = {
                 odia: {
-                    pageTitle: `SB TEXTO - ବିରଳ ସନ୍ଦେଶ`,
+                    pageTitle: `SB TEXTO - ବିରଳ ସନ୍ଦେଶ | ଅଫଲାଇନରେ ଗୁପ୍ତ ଚାଟ୍`,
                     navBrand: "ଏସ୍‌ବି ଟେକ୍ସ୍ଟୋ",
                     navLink1: "ମୋତେ ଫଲୋ କରନ୍ତୁ",
                     navLink2: "ଏସ୍‌ବି ଭିଡିଓ କଲ୍",
                     navLink3: "ଏସ୍‌ବି ଏସ୍‌ଏସ୍‌ଟିଭି ଏନକୋଡର୍",
+                    navLinkTerms: "ସର୍ତ୍ତାବଳୀ",
+                    navLinkPrivacy: "ଗୋପନୀୟତା ନୀତି",
                     langSwitchTo: "E", 
                     mainHeading: "ବିରଳ ସନ୍ଦେଶ",
                     encryptMode: "ଗୁପ୍ତ ସନ୍ଦେଶ କାର୍ଯ",
@@ -627,14 +732,30 @@
                     statusEmptyWordGroup: (index) => `ସୂଚକାଙ୍କ ${index} ରେ ଖାଲି ଶବ୍ଦ ସମୂହ। ଅବୈଧ ଶୈଳୀ।`,
                     statusInvalidWord: (word) => `କ୍ରମରେ ଅବୈଧ ଶବ୍ଦ: '${word}'। ଶବ୍ଦକୋଷ ମେଳ ଖାଉ ନାହିଁ `,
                     statusInternalPwError: "ଆଭ୍ୟନ୍ତରୀଣ ତ୍ରୁଟି: PW_MARKER ଗୁପ୍ତ ସନ୍ଦେଶ ଖୋଲିବା ପାଇଁ ପାସୱାର୍ଡ ଚାବି ନିଖୋଜ।",
-                    footerText: `© ${currentYear} ସନ୍ଦୀପ୍ ବିଶ୍ବାଳ ଜି`
+                    footerText: `© ${currentYear} ସନ୍ଦୀପ୍ ବିଶ୍ବାଳ ଜି.`,
+                    footerTextLine2Prefix: "", // No prefix for second line in Odia
+                    legalTitleTerms: "ସେବା ସର୍ତ୍ତାବଳୀ",
+                    legalTitlePrivacy: "ଗୋପନୀୟତା ନୀତି",
+                    legalCloseBtn: "ବନ୍ଦ କରନ୍ତୁ",
+                    termsContent: `<p>ଏହି ୱେବସାଇଟ୍ (SB TEXTO - ବିରଳ ସନ୍ଦେଶ) କେବଳ ଆପଣଙ୍କ ବ୍ରାଉଜରରେ କାମ କରେ</p>
+                                   <p>ଆପଣ ଯାହାବି ଟାଇପ୍ କରନ୍ତି ବା ଏନକ୍ରିପ୍ଟ/ଡିକ୍ରିପ୍ଟ କରନ୍ତି, ତାହା କୌଣସି ସର୍ଭରକୁ ପଠାଯାଏ ନାହିଁ କିମ୍ବା କେଉଁଠି ସଂରକ୍ଷିତ କରାଯାଏ ନାହିଁ ।</p>
+                                   <p>ଆପଣଙ୍କର ସମସ୍ତ ତଥ୍ୟ ଆପଣଙ୍କ ଡିଭାଇସରେ ହିଁ ରହେ ।</p>
+                                   <p>ଥରେ ଏହି ପୃଷ୍ଠା ଲୋଡ୍ ହୋଇଗଲେ, ଆପଣ ଇଣ୍ଟରନେଟ୍ ବନ୍ଦ କରି ମଧ୍ୟ ଏହାକୁ ବ୍ୟବହାର କରିପାରିବେ (ଅଫଲାଇନ୍)।</p>
+                                   <p>ଏହି ସେବାକୁ ବ୍ୟବହାର କରି, ଆପଣ ଏହି ସର୍ତ୍ତାବଳୀ ସହ ସହମତ ଅଟନ୍ତି ।</p>`,
+                    privacyContent: `<p>ଆମେ ଆପଣଙ୍କ ଗୋପନୀୟତାକୁ ସମ୍ମାନ କରୁ</p>
+                                     <p>SB TEXTO - ବିରଳ ସନ୍ଦେଶ ଆପଣଙ୍କର କୌଣସି ବ୍ୟକ୍ତିଗତ ତଥ୍ୟ, ବାର୍ତ୍ତା, IP,  କିମ୍ବା ପାସୱାର୍ଡ ସଂଗ୍ରହ କରେ ନାହିଁ, ସଂରକ୍ଷଣ କରେ ନାହିଁ, କିମ୍ବା କାହା ସହିତ ସେୟାର କରେ ନାହିଁ ।</p>
+                                     <p>ସମସ୍ତ ଏନକ୍ରିପସନ୍ ଏବଂ ଡିକ୍ରିପସନ୍ ପ୍ରକ୍ରିୟା ଆପଣଙ୍କ ନିଜ ଡିଭାଇସରେ (କ୍ଲାଏଣ୍ଟ-ସାଇଡ୍) ହୋଇଥାଏ ।</p>
+                                     <p>ଯେହେତୁ କୌଣସି ତଥ୍ୟ ସଂଗ୍ରହ କରାଯାଏ ନାହିଁ, ତେଣୁ ଆପଣଙ୍କ ତଥ୍ୟର ଅପବ୍ୟବହାର ହେବାର କୌଣସି ଆଶଙ୍କା ନାହିଁ ।</p>
+                                     <p>ଏହି ୱେବସାଇଟ୍ କେବଳ ଆପଣଙ୍କ ବ୍ରାଉଜରର କ୍ୟାଚ୍ (cache) ବ୍ୟବହାର କରିପାରେ ଯାହାଦ୍ୱାରା ଆପଣ ଅଫଲାଇନରେ ଏହାକୁ ବ୍ୟବହାର କରିପାରିବେ, କିନ୍ତୁ ଏହା ଆପଣଙ୍କ ବାର୍ତ୍ତା ବା ପାସୱାର୍ଡ ସଂରକ୍ଷଣ କରେ ନାହିଁ ।</p>`,
                 },
                 english: {
-                    pageTitle: `SB TEXTO - Birala Sandesha`,
+                    pageTitle: `SB TEXTO - Birala Sandesha | Secret Chat Offline`,
                     navBrand: "SB TEXTO",
                     navLink1: "Follow me",
                     navLink2: "SB Video Call",
                     navLink3: "SB SSTV Encoder",
+                    navLinkTerms: "Terms",
+                    navLinkPrivacy: "Privacy",
                     langSwitchTo: "ଓ", 
                     mainHeading: "Birala Sandesha",
                     encryptMode: "Encrypt Mode",
@@ -666,7 +787,21 @@
                     statusEmptyWordGroup: (index) => `Empty word group at index ${index}. Invalid format.`,
                     statusInvalidWord: (word) => `Invalid word in sequence: '${word}'. Dictionary mismatch?`,
                     statusInternalPwError: "Internal error: Password key missing for PW_MARKER decryption.",
-                    footerText: `© ${currentYear} Sandeep Biswal G.`
+                    footerText: `© ${currentYear} Sandeep Biswal G.`,
+                    footerTextLine2Prefix: "Odia",
+                    legalTitleTerms: "Terms & Conditions",
+                    legalTitlePrivacy: "Privacy Policy",
+                    legalCloseBtn: "Close",
+                    termsContent: `<p>This website (SB TEXTO - Birala Sandesha) operates entirely within your browser.</p>
+                                   <p>Anything you type, encrypt, or decrypt is NOT sent to any server and is NOT stored anywhere by this website.</p>
+                                   <p>All your data remains on your device.</p>
+                                   <p>Once the page is loaded, you can use it even if you turn off your internet connection (offline).</p>
+                                   <p>By using this service, you agree to these terms.</p>`,
+                    privacyContent: `<p>We respect your privacy.</p>
+                                     <p>SB TEXTO - Birala Sandesha does not collect, store, or share any of your personal data, messages, or passwords.</p>
+                                     <p>All encryption and decryption processes happen locally on your device (client-side).</p>
+                                     <p>Since no data is collected, there is no risk of your data being misused by us.</p>
+                                     <p>This website may use your browser's cache for offline accessibility, but it does not store your messages or passwords.</p>`,
                 }
             };
 
@@ -691,8 +826,6 @@
             function updateURLForLanguage(lang) {
                 const langQuery = lang === 'odia' ? '?od' : '?en';
                 const newUrl = `${window.location.pathname}${langQuery}${window.location.hash}`;
-                // Using replaceState to avoid polluting browser history for simple language switches
-                // and to prevent page reload.
                 window.history.replaceState({ path: newUrl }, '', newUrl);
             }
 
@@ -700,11 +833,13 @@
             function updateUIText() {
                 const S = uiStrings[currentLanguage];
 
-                pageTitleEl.textContent = S.pageTitle;
+                document.title = S.pageTitle; // Set document title directly
                 navBrandEl.textContent = S.navBrand;
                 navLink1El.textContent = S.navLink1;
                 navLink2El.textContent = S.navLink2;
                 navLink3El.textContent = S.navLink3;
+                navLinkTermsEl.textContent = S.navLinkTerms;
+                navLinkPrivacyEl.textContent = S.navLinkPrivacy;
                 langSwitchBtnEl.textContent = S.langSwitchTo;
                 
                 mainHeadingEl.textContent = S.mainHeading;
@@ -716,13 +851,34 @@
                 
                 if (copyBtnEl.textContent !== S.copyBtnCopied) {
                     copyBtnEl.textContent = S.copyBtn;
-                } else {
-                     copyBtnEl.textContent = S.copyBtnCopied;
                 }
-                footerEl.innerHTML = `<p>${S.footerText}</p>`;
-                switchMode(currentMode, true); // Update mode-specific texts
+                
+                // Update footer content
+                let footerHTML = `<p>${S.footerText}</p>`;
+                if (S.footerTextLine2Prefix) { // Add second line if defined (for English)
+                     footerHTML += `<p>${S.footerTextLine2Prefix}</p>`;
+                }
+                footerHTML += `<p style="margin-top:10px;"><a href="#" id="footerLinkTermsRevamp" style="margin-right: 15px;">${S.legalTitleTerms}</a> <a href="#" id="footerLinkPrivacyRevamp">${S.legalTitlePrivacy}</a></p>`;
+                footerEl.innerHTML = footerHTML;
+                
+                // Re-attach event listeners for footer links as innerHTML replaces them
+                document.getElementById('footerLinkTermsRevamp').addEventListener('click', (e) => { e.preventDefault(); showLegalContent('terms'); });
+                document.getElementById('footerLinkPrivacyRevamp').addEventListener('click', (e) => { e.preventDefault(); showLegalContent('privacy'); });
 
-                // ADDED: Update URL after UI texts are set
+
+                // If legal modal is open, update its content too
+                if (legalOverlayEl.style.display === 'flex' && currentLegalPage) {
+                    if (currentLegalPage === 'terms') {
+                        legalTitleEl.textContent = S.legalTitleTerms;
+                        legalTextEl.innerHTML = S.termsContent;
+                    } else if (currentLegalPage === 'privacy') {
+                        legalTitleEl.textContent = S.legalTitlePrivacy;
+                        legalTextEl.innerHTML = S.privacyContent;
+                    }
+                    closeLegalBtnEl.textContent = S.legalCloseBtn;
+                }
+
+                switchMode(currentMode, true); 
                 updateURLForLanguage(currentLanguage);
             }
 
@@ -744,7 +900,7 @@
                     inputLabelEl.textContent = S.inputLabelEncrypt;
                     outputLabelEl.textContent = S.outputLabelEncrypt;
                     inputTextEl.placeholder = S.inputTextPlaceholderEncrypt;
-                    customCursorEl.style.borderColor = 'var(--primary-glow)';
+                    if (isFinePointer) customCursorEl.style.borderColor = 'var(--primary-glow)';
                 } else {
                     decryptModeBtnEl.classList.add('active');
                     encryptModeBtnEl.classList.remove('active');
@@ -752,7 +908,7 @@
                     inputLabelEl.textContent = S.inputLabelDecrypt;
                     outputLabelEl.textContent = S.outputLabelDecrypt;
                     inputTextEl.placeholder = S.inputTextPlaceholderDecrypt;
-                    customCursorEl.style.borderColor = 'var(--secondary-glow)';
+                    if (isFinePointer) customCursorEl.style.borderColor = 'var(--secondary-glow)';
                 }
             }
             
@@ -760,10 +916,9 @@
                 let message = uiStrings[currentLanguage][messageKey] || messageKey;
                 if (typeof message === 'function') {
                     message = message(interpolateArg);
-                } else if (messageKey === 'statusErrorGeneric') { // Assuming you might add a generic error key
+                } else if (messageKey === 'statusErrorGeneric') { 
                      message = `${uiStrings[currentLanguage].statusErrorPrefix}${interpolateArg}`;
                 }
-
 
                 statusMessageEl.textContent = message;
                 statusMessageEl.className = `status-message ${type}`;
@@ -776,33 +931,36 @@
                 statusMessageEl.className = 'status-message';
             }
 
-            // --- Custom Cursor & Trail (unchanged) ---
-            document.addEventListener('mousemove', (e) => {
-                customCursorEl.style.left = e.clientX + 'px';
-                customCursorEl.style.top = e.clientY + 'px';
+            // --- Custom Cursor & Trail ---
+            if (isFinePointer) { // Only enable for mouse-like devices
+                document.addEventListener('mousemove', (e) => {
+                    customCursorEl.style.left = e.clientX + 'px';
+                    customCursorEl.style.top = e.clientY + 'px';
 
-                const trail = document.createElement('div');
-                trail.className = 'mouse-trail';
-                document.body.appendChild(trail);
-                trail.style.left = e.clientX + 'px';
-                trail.style.top = e.clientY + 'px';
-                trail.style.backgroundColor = Math.random() > 0.5 ? 'var(--primary-glow)' : 'var(--secondary-glow)';
+                    const trail = document.createElement('div');
+                    trail.className = 'mouse-trail';
+                    document.body.appendChild(trail);
+                    trail.style.left = e.clientX + 'px';
+                    trail.style.top = e.clientY + 'px';
+                    trail.style.backgroundColor = Math.random() > 0.5 ? 'var(--primary-glow)' : 'var(--secondary-glow)';
 
-                setTimeout(() => {
-                    trail.style.opacity = '0';
-                    trail.style.transform = 'translate(-50%, -50%) scale(0.3)';
-                }, 50);
-                setTimeout(() => {
-                    if (document.body.contains(trail)) document.body.removeChild(trail);
-                }, 650);
-            });
-            document.addEventListener('mousedown', () => customCursorEl.classList.add('active'));
-            document.addEventListener('mouseup', () => customCursorEl.classList.remove('active'));
+                    setTimeout(() => {
+                        trail.style.opacity = '0';
+                        trail.style.transform = 'translate(-50%, -50%) scale(0.3)';
+                    }, 50);
+                    setTimeout(() => {
+                        if (document.body.contains(trail)) document.body.removeChild(trail);
+                    }, 650);
+                });
+                document.addEventListener('mousedown', () => customCursorEl.classList.add('active'));
+                document.addEventListener('mouseup', () => customCursorEl.classList.remove('active'));
+            }
 
-            // --- Event Listeners (langSwitchBtnEl listener remains the same, it calls updateUIText) ---
+
+            // --- Event Listeners ---
             langSwitchBtnEl.addEventListener('click', () => {
                 currentLanguage = (currentLanguage === 'odia') ? 'english' : 'odia';
-                updateUIText(); // This will now also update the URL
+                updateUIText();
             });
 
             encryptModeBtnEl.addEventListener('click', () => switchMode('encrypt'));
@@ -838,8 +996,7 @@
                     if (uiStrings[currentLanguage][messageKey]) {
                          showStatus(messageKey, "error", interpolate);
                     } else {
-                         // Fallback for generic errors if not specifically handled by uiStrings
-                         showStatus("statusErrorGeneric", "error", error.message);
+                         showStatus("statusErrorPrefix", "error", error.message); // Generic error
                     }
                     outputTextEl.value = '';
                 }
@@ -852,7 +1009,11 @@
                         .then(() => {
                             showStatus('statusCopySuccess', 'success');
                             copyBtnEl.textContent = S.copyBtnCopied;
-                            setTimeout(() => copyBtnEl.textContent = S.copyBtn, 2000);
+                            setTimeout(() => {
+                                if (copyBtnEl.textContent === S.copyBtnCopied) { // Check if it wasn't changed by lang switch
+                                   copyBtnEl.textContent = S.copyBtn;
+                                }
+                            }, 2000);
                         })
                         .catch(err => {
                             console.error('Failed to copy: ', err);
@@ -863,7 +1024,7 @@
                 }
             });
             
-            // --- Mobile Menu Toggle (unchanged) ---
+            // --- Mobile Menu Toggle ---
             if (hamburgerMenuBtn && navbarEl && navLinksContentEl) {
                 hamburgerMenuBtn.addEventListener('click', () => {
                     navbarEl.classList.toggle('mobile-menu-open');
@@ -873,16 +1034,61 @@
 
                 navLinksContentEl.addEventListener('click', (event) => {
                     if (event.target.tagName === 'A') { 
-                        if (navbarEl.classList.contains('mobile-menu-open')) {
-                            navbarEl.classList.remove('mobile-menu-open');
-                            hamburgerMenuBtn.setAttribute('aria-expanded', 'false');
+                        // For regular links, close menu. For legal links, also close menu.
+                        if (!event.target.id.startsWith('navLinkTerms') && !event.target.id.startsWith('navLinkPrivacy')) {
+                            // If it's an external link or non-modal internal link
+                            if (navbarEl.classList.contains('mobile-menu-open')) {
+                                navbarEl.classList.remove('mobile-menu-open');
+                                hamburgerMenuBtn.setAttribute('aria-expanded', 'false');
+                            }
+                        } else { // For terms/privacy, just ensure menu closes if open
+                             if (navbarEl.classList.contains('mobile-menu-open')) {
+                                navbarEl.classList.remove('mobile-menu-open');
+                                hamburgerMenuBtn.setAttribute('aria-expanded', 'false');
+                            }
                         }
                     }
                 });
             }
 
+            // --- Legal Content Modal Logic ---
+            function showLegalContent(type) {
+                currentLegalPage = type;
+                const S = uiStrings[currentLanguage];
+                if (type === 'terms') {
+                    legalTitleEl.textContent = S.legalTitleTerms;
+                    legalTextEl.innerHTML = S.termsContent;
+                } else if (type === 'privacy') {
+                    legalTitleEl.textContent = S.legalTitlePrivacy;
+                    legalTextEl.innerHTML = S.privacyContent;
+                }
+                closeLegalBtnEl.textContent = S.legalCloseBtn;
+                legalOverlayEl.style.display = 'flex';
+            }
 
-            // --- Core Logic (unchanged) ---
+            function hideLegalContent() {
+                currentLegalPage = null;
+                legalOverlayEl.style.display = 'none';
+            }
+
+            navLinkTermsEl.addEventListener('click', (e) => { e.preventDefault(); showLegalContent('terms'); });
+            navLinkPrivacyEl.addEventListener('click', (e) => { e.preventDefault(); showLegalContent('privacy'); });
+            // Footer links are re-attached in updateUIText due to innerHTML overwrite
+            
+            closeLegalBtnEl.addEventListener('click', hideLegalContent);
+            legalOverlayEl.addEventListener('click', (e) => {
+                if (e.target === legalOverlayEl) { // Click on overlay background
+                    hideLegalContent();
+                }
+            });
+            document.addEventListener('keydown', (e) => { // Close with Escape key
+                if (e.key === 'Escape' && legalOverlayEl.style.display === 'flex') {
+                    hideLegalContent();
+                }
+            });
+
+
+            // --- Core Logic (unchanged from original, except error messages might map to new keys) ---
             function getPasswordKeyArray(password) {
                 if (!password) return null;
                 let keyArray = [];
@@ -894,7 +1100,7 @@
 
             function numberToBaseNWords(num) {
                 if (num === 0) return [wordDictionary[0]];
-                if (num < 0) throw new Error("Cannot encode negative numbers directly."); // Consider localizing if thrown to user
+                if (num < 0) throw new Error("Cannot encode negative numbers directly."); 
                 const words = [];
                 let currentNum = num;
                 while (currentNum > 0) {
@@ -951,10 +1157,8 @@
 
                 if (prefix === PW_MARKER && !passwordKeyArr) throw new Error("statusPwRequired");
                 if (prefix === NO_PW_MARKER && passwordKeyArr) {
-                     // Use console.warn as it's a notice, not a critical error for the user UI
                     console.warn(uiStrings[currentLanguage]?.statusPwNotNeeded || uiStrings.english.statusPwNotNeeded);
-                    // Optionally show a non-error status message if desired:
-                    // showStatus('statusPwNotNeeded', 'info'); // 'info' could be a new style
+                    // showStatus('statusPwNotNeeded', 'info'); // Optionally show non-error status
                 }
                 if (prefix !== PW_MARKER && prefix !== NO_PW_MARKER) throw new Error("statusUnknownMarker");
 
@@ -962,7 +1166,7 @@
                 for (let i = 0; i < encryptedCharsWordsGroups.length; i++) {
                     const wordGroupString = encryptedCharsWordsGroups[i];
                     if (!wordGroupString) {
-                        if (i === encryptedCharsWordsGroups.length - 1 && encryptedCharsWordsGroups.length > 1) continue;
+                        if (i === encryptedCharsWordsGroups.length - 1 && encryptedCharsWordsGroups.length > 1 && wordGroupString === "") continue; // Allow trailing separator
                         const err = new Error('statusEmptyWordGroup');
                         err.customData = i;
                         throw err;
@@ -972,7 +1176,7 @@
                     let charCode = baseNWordsToNumber(wordsArray);
 
                     if (prefix === PW_MARKER) {
-                         if (!passwordKeyArr) throw new Error("statusInternalPwError"); // Should be caught by earlier check but good for robustness
+                         if (!passwordKeyArr) throw new Error("statusInternalPwError");
                         const keyChar = passwordKeyArr[i % passwordKeyArr.length];
                         charCode = charCode ^ keyChar;
                     } else if (prefix === NO_PW_MARKER) {
@@ -982,9 +1186,22 @@
                 }
                 return decryptedText;
             }
+            
+            // --- Service Worker Registration ---
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                  .then(registration => {
+                    console.log('SBTEXTO ServiceWorker registration successful with scope: ', registration.scope);
+                  })
+                  .catch(err => {
+                    console.log('SBTEXTO ServiceWorker registration failed: ', err);
+                  });
+              });
+            }
 
             // --- Initialize ---
-            updateUIText(); // This will set initial UI text AND update URL based on detected/default language
+            updateUIText(); 
         });
     </script>
 </body>
